@@ -114,10 +114,10 @@ LANGUAGE_CODE = 'uz'
 USE_I18N = True
 
 LANGUAGES = [
-    ('uz', _('O‘zbekcha')),
-    ('ru', _('Русский')),
-    ('en', _('English')),
-    ('zh-hans', _('中文')),
+    ('uz', 'O‘zbekcha'),
+    ('ru', 'Русский'),
+    ('en', 'English'),
+    ('zh-hans', '中文'),
 ]
 
 LOCALE_PATHS = [
