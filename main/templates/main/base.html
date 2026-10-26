@@ -1,0 +1,641 @@
+{% load i18n %}
+{% load static i18n %}
+
+<!DOCTYPE html>
+
+
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}2-son texnikum{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+html, body {margin:0;padding:0;overflow-x:hidden;}
+
+/* ================= TOP WHITE BAR ================= */
+.top-white-bar{background:#fff;border-bottom:1px solid #e5e5e5;color:#5166b0;}
+.top-white-inner{display:flex;align-items:center;justify-content:space-between;min-height:80px;}
+.logo-text{font-size:22px;color:#5166b0;line-height:1.2;}
+.site-logo{
+    height: 70px;      /* asosiy balandlik */
+    width: auto;
+    object-fit: contain;
+}
+
+.top-center{display:flex;gap:50px;font-size:17px;}
+.top-item{display:flex;align-items:center;gap:8px;}
+.top-right{display:flex;align-items:center;gap:18px;}
+.top-icon{font-size:22px;cursor:pointer;}
+.lang-btn{border:1px solid #dcdcdc;background:#f7f7f7;padding:6px 14px;border-radius:4px;font-weight:600;}
+
+/* ================= NAV LINE ================= */
+.nav-line{background:#5166b0;padding:12px 10px;}
+.nav-line ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;}
+.nav-line li{display:flex;align-items:center;font-size:22px;font-weight:600;color:white;white-space:nowrap;margin-right:28px;}
+.nav-line a{color:white;text-decoration:none;}
+.nav-line li::after{
+    content:">";
+    font-size:22px;
+    font-weight:bold;
+    margin:0 14px;
+    color:white;
+    transition:0.25s ease;
+}
+
+.nav-line li:hover::after{
+    color:#ffc107;
+}
+
+.nav-line li.active::after{
+    color:#ffc107;
+}
+
+/* ================= HERO ================= */
+.hero{
+width:100%;min-height:65vh;display:flex;align-items:center;justify-content:center;
+text-align:center;position:relative;padding:60px 15px;
+background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url("/static/main/images/texnikum2.jpg") center/cover no-repeat;
+}
+.hero h1{font-size:3rem;font-weight:700;color:white;}
+.hero p{color:#eaeaea;}
+
+/* ================= SCROLL ARROWS ================= */
+.scroll-down{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:2px;}
+.scroll-down span{width:20px;height:20px;border-bottom:4px solid #ffc107;border-right:4px solid #ffc107;
+transform:rotate(45deg);animation:arrow 1.5s infinite;opacity:0;}
+.scroll-down span:nth-child(1){animation-delay:0s;}
+.scroll-down span:nth-child(2){animation-delay:.2s;}
+.scroll-down span:nth-child(3){animation-delay:.4s;}
+@keyframes arrow{0%{opacity:0;transform:rotate(45deg) translate(-6px,-6px);}
+50%{opacity:1;}100%{opacity:0;transform:rotate(45deg) translate(6px,6px);}}
+
+/* ================= YANGILIKLAR ================= */
+.news-img{overflow:hidden;}
+.news-img img{width:100%;height:220px;object-fit:cover;transition:.6s ease;}
+.news-card:hover img{transform:scale(1.1);}
+.news-date{color:#5166b0;font-weight:600;font-size:14px;}
+
+/* SCROLL ANIMATION */
+.reveal{opacity:0;transform:translateY(80px);transition:.8s ease;}
+.reveal.active{opacity:1;transform:translateY(0);}
+.top-left{
+    display: flex;
+    align-items: center;
+    margin-left: -60px;   /* 🔥 biroz chapga tortadi */
+}
+
+/* logo + text yonma-yon */
+.logo-box{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+/* logo o'lchami */
+.site-logo{
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* logo yonidagi yozuv */
+.logo-title{
+    line-height: 1.1;
+    color: #5166b0;
+}
+
+.logo-title strong{
+    font-size: 18px;
+}
+
+.logo-title span{
+    font-size: 14px;
+}
+.logo-title{
+    line-height: 1.15;
+    color: #5166b0;
+    font-family: "Segoe UI", Arial, sans-serif;  /* 🔥 hammasi bir xil shrift */
+}
+
+.logo-title strong{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.logo-title span{
+    font-size: 16px;
+    font-weight: 500;
+}
+.location-icon{
+    width: 45px;      /* 🔽 shu yerda kattaligini boshqarasan */
+    height: auto;
+    margin-right: 10px;
+}
+.search-icon{
+    font-size:22px;
+    color:#5166b0;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.search-icon:hover{
+    color:#1f2f6d;
+    transform: scale(1.15);
+}
+/* ===== SEARCH MODAL ===== */
+.search-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    opacity:0;
+    pointer-events:none;
+    transition:0.4s;
+}
+
+.search-modal.active{
+    opacity:1;
+    pointer-events:auto;
+}
+.search-box{
+    display:flex;
+    width:60vw;              /* 🔥 70 → 60 */
+    max-width:600px;        /* 🔥 720 → 600 */
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.45);
+    animation: zoomIn .3s ease;
+}
+
+.search-box input{
+    flex:1;
+    border:none;
+    padding:16px 20px;       /* 🔥 biroz pastroq */
+    font-size:18px;         /* 🔥 yozuvi ixcham */
+    outline:none;
+}
+
+.search-box button{
+    background:#5166b0;
+    color:#fff;
+    border:none;
+    padding:0 24px;
+    font-size:20px;
+    cursor:pointer;
+}
+.lang-select{
+    border:1px solid #dcdcdc;
+    padding:6px 12px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:14px;
+    background:#fff;
+    color:#5166b0;
+    cursor:pointer;
+    outline:none;
+    transition:0.25s ease;
+}
+
+.lang-select:hover{
+    border-color:#5166b0;
+    box-shadow:0 0 0 2px rgba(81,102,176,0.15);
+}
+
+.lang-select:focus{
+    border-color:#5166b0;
+    box-shadow:0 0 0 3px rgba(81,102,176,0.25);
+}
+.lang-dropdown{position:relative;}
+
+.lang-current{
+    border:1px solid #dcdcdc;
+    background:#fff;
+    padding:6px 10px;
+    border-radius:8px;
+    font-weight:600;
+    color:#5166b0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.lang-current i{font-size:12px;}
+
+.lang-menu{
+    position:absolute;
+    top:110%;
+    right:0;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    overflow:hidden;
+    min-width:150px;
+    display:none;
+    z-index:999;
+}
+
+.lang-menu button{
+    border:none;
+    background:none;
+    width:100%;
+    padding:10px 14px;
+    text-align:left;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.lang-menu button:hover{
+    background:#f2f4fb;
+}
+
+.lang-menu .fi{font-size:20px;}
+.has-submenu{
+    position:relative;
+}
+
+.submenu{
+    position:absolute;
+    top:140%;
+    left:0;
+    background:#5166b0;
+    list-style:none;
+    padding:10px 0;
+    margin:0;
+    min-width:260px;
+    border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:.3s ease;
+    z-index:999;
+}
+
+.submenu li{
+    margin:0;
+    padding:0;
+}
+
+.submenu li a{
+    display:block;
+    padding:10px 18px;
+    color:white;
+    font-size:16px;
+    font-weight:500;
+    text-decoration:none;
+    transition:.25s;
+}
+
+.submenu li a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+/* hover bo‘lsa ochiladi */
+.has-submenu:hover .submenu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+.nav-line li > a{
+    transition:0.25s ease;
+}
+
+.nav-line li:hover > a{
+    color:#ffc107;                 /* sariq rang */
+	.navbar{
+    background: linear-gradient(90deg,#0d6efd,#0a58ca);
+}
+
+}
+.submenu li a{
+    transition:0.25s ease;
+}
+
+.submenu li a:hover{
+    background:transparent;   /* 🔥 fon yo‘q */
+    color:#ffc107;             /* 🔥 faqat yozuv sariq */
+}
+.nav-line .active > a{
+    color:#ffc107 !important;
+    font-weight:700;
+}
+/* 🔥 Active menu */
+.nav-line li.active > a{
+    color:#ffc107;
+}
+
+/* 🔥 Hover bo‘lganda */
+.nav-line li:hover > a{
+    color:#ffc107;
+}
+.news-img {
+    position: relative;
+}
+
+.news-date-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #0d6efd;
+    color: white;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.news-card {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.news-title {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.news-date {
+    font-size: 14px;
+    color: #9aa0a6;
+}
+.full-text p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+</style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".toggle-btn").forEach(function(button) {
+        button.addEventListener("click", function() {
+            const cardBody = this.closest(".card-body");
+            const shortText = cardBody.querySelector(".short-text");
+            const fullText = cardBody.querySelector(".full-text");
+
+            fullText.classList.toggle("d-none");
+            shortText.classList.toggle("d-none");
+
+            if (this.innerText === "BATAFSIL") {
+                this.innerText = "YOPISH";
+            } else {
+                this.innerText = "BATAFSIL";
+            }
+        });
+    });
+});
+</script>
+<body>
+
+<!-- TOP WHITE BAR -->
+<div class="top-white-bar">
+<div class="container top-white-inner">
+<div class="top-left">
+    <a href="/" class="logo-box">
+        <img src="/static/main/images/logo.png" alt="Texnikum logosi" class="site-logo">
+        <div class="logo-title">
+            <strong>2-son Texnikum</strong><br>
+      
+        </div>
+    </a>
+</div>
+
+<div class="top-center">
+<div class="top-item">
+    <img src="/static/main/images/location.png" class="location-icon">
+
+   <b>{% trans "Navoiy viloyati Qiziltepa tumani G'oyibon mahallasi" %}</b>
+</div>
+
+<div class="top-item">
+    <img src="/static/main/images/Ikon.png" class="phone-icon">
+    <b>+998 (79) 555 23 15</b> 
+</div>
+
+</div>
+<!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal">
+<form class="search-box" method="GET" action="{% url 'search' %}">
+    <input type="text" name="q" placeholder="Izlash..." required>
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+</form>
+
+  <span class="close-search" id="closeSearch">&times;</span>
+</div>
+
+<form action="{% url 'set_language' %}" method="post" class="lang-form">
+{% csrf_token %}
+<input type="hidden" name="next" value="{{ request.path }}">
+
+<div class="lang-dropdown">
+    <button type="button" class="lang-current" id="langBtn">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% if LANGUAGE_CODE == "uz" %}
+            <span class="fi fi-uz"></span> UZ
+        {% elif LANGUAGE_CODE == "ru" %}
+            <span class="fi fi-ru"></span> RU
+        {% elif LANGUAGE_CODE == "en" %}
+            <span class="fi fi-gb"></span> EN
+        {% elif LANGUAGE_CODE == "zh-hans" %}
+            <span class="fi fi-cn"></span> CN
+        {% endif %}
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <div class="lang-menu" id="langMenu">
+        <button name="language" value="uz"><span class="fi fi-uz"></span> O‘zbek</button>
+        <button name="language" value="ru"><span class="fi fi-ru"></span> Русский</button>
+        <button name="language" value="en"><span class="fi fi-gb"></span> English</button>
+        <button name="language" value="zh-hans"><span class="fi fi-cn"></span> 中文</button>
+    </div>
+</div>
+</form>
+
+
+</div>
+</div>
+</div>
+<!-- NAV -->
+<div class="nav-line">
+<ul>
+<li><a href="/">{% trans "Bosh sahifa" %}</a></li>
+<li class="has-submenu">
+    <a href="#">Texnikum haqida</a>
+    <ul class="submenu">
+        <li><a href="#">Tariximiz</a></li>
+        <a href="{% url 'rahbariyat' %}">Rahbariyat</a>
+		<a href="{% url 'oqituvchilar' %}">O‘qituvchilar</a>
+    </ul>
+</li>
+
+<li class="has-submenu">
+    <a href="#">Yo'nalishlar</a>
+    <ul class="submenu">
+        <li> <a href="{% url 'tikuvchi' %}">Tikuvchi</a></li>
+        <li><a href="{% url 'avtomobil_shasse' %}">
+    Avtomobil shassesiga texnik xizmat ko‘rsatish
+</a>
+</li>
+        <li><a href="{% url 'elektromontyor' %}">
+    Elektromontyor
+</a>
+</li>
+		<li><a href="{% url 'payvandlovchi' %}">
+    Payvandlovchi
+</a>
+</li>
+		<li><a href="{% url 'sartarosh' %}">
+    Sartarosh (Modelyer)
+</a>
+</li>
+		<li><a href="{% url 'traktorchi_mashinist' %}">
+    Traktorchi-mashinist
+</a>
+</li>
+		<li><a href="{% url 'kompyuter_tizimlari' %}">
+    Kompyuter tizimlarida dasturlash
+</a>
+</li>
+    </ul>
+</li>
+<li><a href="#">{% trans "Xalqaro aloqalar" %}</a></li>
+<li class="has-submenu">
+    <a href="#">Ochiqlik</a>
+    <ul class="submenu">
+        <li><a href="#">Ochiq ma’lumotlar</a></li>
+        <li><a href="#">Bo‘sh ish o‘rinlari</a></li>
+    </ul>
+</li>
+<li class="has-submenu">
+    <a href="#">Aloqa</a>
+    <ul class="submenu">
+        <li><a href="#">Bog‘lanish</a></li>
+        <li><a href="#">Manzil</a></li>
+        <li><a href="#">Rahbariyat qabul kunlari</a></li>
+        <li><a href="#">Murojaat yuborish</a></li>
+    </ul>
+</li>
+
+</ul>
+</div>
+<!-- Social Sidebar -->
+{% block content %}{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function reveal(){
+let reveals=document.querySelectorAll(".reveal");
+for(let i=0;i<reveals.length;i++){
+let wh=window.innerHeight;
+let top=reveals[i].getBoundingClientRect().top;
+if(top<wh-120){reveals[i].classList.add("active");}
+}}
+window.addEventListener("scroll",reveal);
+reveal();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const openSearch = document.getElementById("openSearch");
+  const closeSearch = document.getElementById("closeSearch");
+  const searchModal = document.getElementById("searchModal");
+
+  openSearch.addEventListener("click", function () {
+    searchModal.classList.add("active");
+  });
+
+  closeSearch.addEventListener("click", function () {
+    searchModal.classList.remove("active");
+  });
+
+  searchModal.addEventListener("click", function(e){
+    if(e.target === searchModal){
+      searchModal.classList.remove("active");
+    }
+  });
+
+});
+</script>
+<script>
+const langBtn = document.getElementById("langBtn");
+const langMenu = document.getElementById("langMenu");
+
+langBtn.addEventListener("click", () => {
+    langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
+});
+
+document.addEventListener("click", (e)=>{
+    if(!e.target.closest(".lang-dropdown")){
+        langMenu.style.display = "none";
+    }
+});
+</script>
+
+</div>   <!-- agar container ochilgan bo‘lsa -->
+<style>
+.hero-social{
+    position: fixed;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 9999;
+}
+
+.hero-social a{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;           /* Dumaloq */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.2);  /* Rasm bilan blend */
+}
+
+/* Telegram */
+.hero-social .tg{
+    background: #2AABEE;
+}
+
+/* Instagram */
+.hero-social .insta{
+    background: linear-gradient(
+        45deg,
+        #f58529,
+        #dd2a7b,
+        #8134af,
+        #515bd4
+    );
+}
+
+/* Hover */
+.hero-social a:hover{
+    transform: scale(1.15);
+}
+</style>
+
+</body>
+</html>

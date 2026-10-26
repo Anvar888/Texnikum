@@ -1,0 +1,213 @@
+/* ===== Rahbariyat sahifasi ===== */
+
+.director-title{
+    font-size: 38px;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 70px;   /* boshqa matnlardan ancha pastga tushadi */
+}
+
+.director-name{
+    color: #5166b0;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.director-info{
+    color: #000;
+    font-size: 17px;
+    line-height: 1.7;
+}
+.leader-box{
+    display: flex;
+    align-items: center;      /* vertikal o‘rtaga */
+    justify-content: center;  /* gorizontal markaz */
+    gap: 60px;
+}
+.leader-img img{
+    width: 260px;
+    border-radius: 16px;
+}
+
+s
+
+.director-title{
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.leader-name{
+    font-size: 26px;
+    font-weight: 700;
+    color: #4f63b6;
+    margin-bottom: 12px;
+}
+
+.leader-text p{
+    margin: 4px 0;
+    color: #000;
+    font-size: 17px;
+}
+.deputy-title{
+    text-align: center;
+    margin: 60px 0 30px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.deputy-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.deputy-card{
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.deputy-card img{
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 15px;
+}
+
+.deputy-card h3{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.deputy-card .name{
+    color: #3f5cc8;
+    font-weight: 600;
+    margin: 8px 0;
+}
+.teacher-card{
+    transition:0.4s;
+}
+
+.teacher-card:hover{
+    transform:translateY(-12px);
+}
+.hero-pro{
+    height:90vh;
+    background:
+        linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+        url("/static/main/images/texnikum2.jpg") center/cover;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-pro h1{
+    font-size:64px;
+    font-weight:800;
+}
+
+.hero-pro p{
+    font-size:22px;
+    margin:20px 0;
+}
+
+.hero-btn{
+    background:#5166b0;
+    color:white;
+    padding:14px 34px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    background:#2f49a3;
+    transform:translateY(-4px);
+}
+<section class="stats">
+
+    <div class="stat">
+        <h2>1500+</h2>
+        <p>O‘quvchilar</p>
+    </div>
+
+    <div class="stat">
+        <h2>120</h2>
+        <p>O‘qituvchilar</p>
+    </div>
+
+    <div class="stat">
+        <h2>12</h2>
+        <p>Yo‘nalishlar</p>
+    </div>
+
+    <div class="stat">
+        <h2>95%</h2>
+        <p>Ish bilan ta’minlanganlar</p>
+    </div>
+
+</section>
+.stats{
+    display:flex;
+    justify-content:space-around;
+    padding:70px 0;
+    background:#f5f7ff;
+    text-align:center;
+}
+
+.stat h2{
+    font-size:48px;
+    color:#5166b0;
+}
+
+.stat p{
+    font-weight:600;
+}
+.hero-social{
+    position: absolute;   /* fixed emas */
+    top: 50%;
+    left: -50px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 5;
+}
+.hero-social a{
+    width: 60px;
+    height: 60px;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.hero-social .tg{
+    background: #0088cc;
+}
+
+.hero-social .insta{
+    background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+}
+
+.hero-social a:hover{
+    transform: translateX(10px);
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+

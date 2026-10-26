@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Katta rasm -->
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-6">
+            <img src="{% static 'main/images/tikuvchi1.jpg' %}" 
+                 class="img-fluid rounded shadow gallery-img img-anim mb-4">
+
+            <img src="{% static 'main/images/tikuvchi2.jpg' %}" 
+                 class="img-fluid rounded shadow gallery-img img-anim">
+        </div>
+
+        <div class="col-md-6">
+            <img src="{% static 'main/images/tikuvchi3.jpg' %}" 
+                 class="img-fluid rounded shadow gallery-img img-anim mb-4">
+
+            <img src="{% static 'main/images/tikuvchi4.jpg' %}" 
+                 class="img-fluid rounded shadow gallery-img img-anim">
+        </div>
+
+    </div>
+</div>
+<style>
+.gallery-img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+/* boshlanishda ko‘rinmaydi */
+.img-anim{
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 0.8s forwards;
+}
+
+/* 0.5 sekund interval */
+.img-anim:nth-child(1){ animation-delay:0.5s; }
+.img-anim:nth-child(2){ animation-delay:1s; }
+.img-anim:nth-child(3){ animation-delay:1.5s; }
+.img-anim:nth-child(4){ animation-delay:2s; }
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+
+{% endblock %}

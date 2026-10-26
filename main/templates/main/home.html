@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+{% block title %}Bosh sahifa{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <!-- Social ikonlar -->
+    <div class="hero-social">
+        <a href="https://t.me/qt2skhm" target="_blank" class="tg">
+            <i class="fab fa-telegram-plane"></i>
+        </a>
+
+        <a href="https://www.instagram.com/2_son_politexnikum__" target="_blank" class="insta">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <div>
+        <h1>Qiziltepa tuman 2-son texnikum</h1>
+        <p>Zamonaviy kasb-hunar ta’limi - sifatli bilim va mustahkam kelajak</p>
+    </div>
+
+    <div class="scroll-down">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</section>
+
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Yangiliklar</h2>
+
+    <div class="row g-4">
+
+        {% for item in news %}
+        <div class="col-lg-4 col-md-6 reveal">
+
+            <div class="card news-card shadow-sm h-100">
+
+                <div class="news-img">
+                    <img src="{{ item.image.url }}" class="card-img-top">
+                </div>
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="news-title">{{ item.title }}</h5>
+<p class="short-text">
+    {{ item.content|truncatewords:18 }}
+</p>
+
+<div class="full-text d-none">
+    {{ item.content|linebreaks }}
+</div>
+
+<div class="news-footer mt-auto d-flex justify-content-between align-items-center">
+    <span class="news-date">
+        {{ item.created_at|date:"d-m-Y" }}
+    </span>
+
+    <button class="btn btn-primary btn-sm toggle-btn">
+        BATAFSIL
+    </button>
+</div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

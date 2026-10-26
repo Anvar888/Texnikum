@@ -1,0 +1,77 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div class="container my-5">
+
+  <h2 class="text-center fw-bold mb-5 text-dark">
+      Texnikum rahbariyati
+  </h2>
+
+  {% if director %}
+  <div class="leader-box shadow rounded-4 p-4 bg-white d-flex align-items-center justify-content-center gap-5">
+
+      <div class="leader-img">
+          <img src="{{ director.image.url }}" alt="{{ director.full_name }}" style="max-width:260px;border-radius:20px;">
+      </div>
+
+      <div class="leader-text text-center">
+
+          <div class="director-title fw-bold fs-3 mb-3">
+              {{ director.job_title }}
+          </div>
+
+          <div class="leader-name fs-4 text-primary fw-semibold mb-3">
+              {{ director.full_name }}
+          </div>
+
+          {% if director.phone %}
+          <p>📞 Telefon: {{ director.phone }}</p>
+          {% endif %}
+
+          {% if director.email %}
+          <p>✉️ Email: {{ director.email }}</p>
+          {% endif %}
+
+      </div>
+
+  </div>
+  {% endif %}
+
+  <!-- ================= O‘RINBOSARLAR ================= -->
+
+  {% if deputies %}
+  <h2 class="text-center fw-bold mt-5 mb-4">Direktor o‘rinbosarlari</h2>
+
+  <div class="row g-4 justify-content-center">
+
+      {% for d in deputies %}
+      <div class="col-md-4">
+
+          <div class="deputy-card shadow rounded-4 p-3 bg-white text-center h-100">
+
+              <img src="{{ d.image.url }}" alt="{{ d.full_name }}"
+                   style="width:200px;border-radius:16px;margin-bottom:15px;">
+
+              <h5 class="fw-bold">{{ d.job_title }}</h5>
+              <p class="text-primary fw-semibold">{{ d.full_name }}</p>
+
+              {% if d.phone %}
+              <p>📞 {{ d.phone }}</p>
+              {% endif %}
+
+              {% if d.email %}
+              <p>✉️ {{ d.email }}</p>
+              {% endif %}
+
+          </div>
+
+      </div>
+      {% endfor %}
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}
