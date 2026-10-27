@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +26,10 @@ SECRET_KEY = 'django-insecure-^l&7f+oi)@(qha%%fhcfcfm0b@dj9t)okp+zd!deixw%o70y(8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '.vercel.app',
-    'localhost',
-    '127.0.0.1',
-]
-
+ALLOWED_HOSTS = os.environ.get(
+    'DJANGO_ALLOWED_HOSTS',
+    '.vercel.app,localhost,127.0.0.1'
+).split(',') 
 
 # Application definition
 
@@ -136,7 +135,7 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-import os
+
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
