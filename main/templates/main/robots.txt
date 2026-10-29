@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qiziltepa-2sontexnikum.uz/sitemap.xml
