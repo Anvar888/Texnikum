@@ -28,6 +28,8 @@ SECRET_KEY = 'django-insecure-^l&7f+oi)@(qha%%fhcfcfm0b@dj9t)okp+zd!deixw%o70y(8
 DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get(
+    "qiziltepa-2sontexnikum.uz",
+    "www.qiziltepa-2sontexnikum.uz",
     'DJANGO_ALLOWED_HOSTS',
     '.vercel.app,localhost,127.0.0.1'
 ).split(',') 
