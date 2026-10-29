@@ -1,4 +1,6 @@
 from django.urls import path
+from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -13,4 +15,11 @@ urlpatterns = [
     path('sartarosh/', views.sartarosh, name='sartarosh'),
     path('traktorchi-mashinist/', views.traktorchi_mashinist, name='traktorchi_mashinist'),
     path('kompyuter-tizimlarida-dasturlash/', views.kompyuter_tizimlari, name='kompyuter_tizimlari'),
+    path(
+    "robots.txt",
+    TemplateView.as_view(
+        template_name="robots.txt",
+        content_type="text/plain"
+    ),
+),
 ]
