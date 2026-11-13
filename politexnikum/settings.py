@@ -16,7 +16,7 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^l&7f+oi)@(qha%%fhcfcfm0b@dj9t)okp+zd!deixw%o70y(8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
@@ -161,7 +161,7 @@ STORAGES = {
             "endpoint_url": os.environ.get("AWS_ENDPOINT_URL_S3"),
             "region_name": os.environ.get("AWS_S3_REGION_NAME"),
             "access_key": os.environ.get("AWS_ACCESS_KEY_ID"),
-            SECRET_KEY = os.environ.get("SECRET_KEY")
+            "secret_key": os.environ.get("AWS_SECRET_ACCESS_KEY"),
             "querystring_auth": False,
             "default_acl": None,
         },
