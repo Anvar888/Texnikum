@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^l&7f+oi)@(qha%%fhcfcfm0b@dj9t)okp+zd!deixw%o70y(8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
@@ -148,6 +148,11 @@ MEDIA_URL = '/media/'
 
 import os
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
@@ -156,7 +161,7 @@ STORAGES = {
             "endpoint_url": os.environ.get("AWS_ENDPOINT_URL_S3"),
             "region_name": os.environ.get("AWS_S3_REGION_NAME"),
             "access_key": os.environ.get("AWS_ACCESS_KEY_ID"),
-            "secret_key": os.environ.get("AWS_SECRET_ACCESS_KEY"),
+            SECRET_KEY = os.environ.get("SECRET_KEY")
             "querystring_auth": False,
             "default_acl": None,
         },
@@ -165,7 +170,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
