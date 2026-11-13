@@ -153,6 +153,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
