@@ -5,3 +5,5 @@ dj-database-url
 psycopg[binary]
 whitenoise
 Pillow==12.0.0
+django-storages[s3]
+boto3
